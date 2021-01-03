@@ -1,0 +1,44 @@
+name: UNPACME
+version: 1
+description: This service submits 32-bit Portable Executables to unpac.me and provides the results.
+
+accepts: executable/windows/pe32
+rejects: empty
+
+stage: CORE
+category: Dynamic Analysis
+
+file_required: true
+timeout: 600
+disable_cache: true
+
+enabled: true
+is_external: true
+licence_count: 0
+
+config:
+  base_url: https://api.unpac.me/api/v1/public/
+
+submission_params:
+  - default: ''
+    name: api_key
+    type: str
+    value: ''
+
+heuristics:
+  - heur_id: 1
+    name: Successfully unpacked binary
+    score: 500
+    filetype: "*"
+    description: Binary was successfully unpacked.
+  - heur_id: 2
+    name: Applied malware ID
+    score: 500
+    filetype: "*"
+    description: Binary contains an applied malware ID.
+
+docker_config:
+  image: localhost:5000/assemblyline-service-unpacme:latest
+  cpu_cores: 0.25
+  ram_mb: 128
+  allow_internet_access: true
