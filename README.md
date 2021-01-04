@@ -6,7 +6,7 @@ This Assemblyline service submits PE32 binaries to the [unpac.me](unpac.me) API 
 
 ## Execution
 
-This service uploads the provided file to unpac.me using the [unpac.me API](https://api.unpac.me/) and returns the results (if any). Simply your API key as a user parameter in order to use the service.
+This service uploads the provided file to unpac.me using the [unpac.me API](https://api.unpac.me/) and returns the results (if any). Your API key is provided as a parameter which is passed to the service for processing.
 
 Because this service queries an external API, if selected by the user, it will prompt the user and notify them that their file or metadata related to their file will leave our system.
 
