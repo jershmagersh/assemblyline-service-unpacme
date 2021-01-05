@@ -115,7 +115,9 @@ class UnpacMeAL(ServiceBase):
         for r in presults['unpacked_samples']:
             if len(r['malware_id']) > 0:
                 for rm in r['malware_id']:
-                    result.add_section(ResultSection("{} - {}".format(r['sha256'], rm['name']), heuristic=Heuristic(2)))
+                    section = ResultSection("{} - {}".format(r['sha256'], rm['name']), heuristic=Heuristic(2))
+                    section.add_line("Details: {}".format(rm['reference']))
+                    result.add_section(section)
             request.add_extracted(r['data_path'], r['sha256'], f'Unpacked from {request.sha256}')
 
         result.add_section(ResultSection(f"UNPACME Detailed Results", body_format=BODY_FORMAT.JSON,
