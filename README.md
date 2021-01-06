@@ -12,8 +12,8 @@ Because this service queries an external API, if selected by the user, it will p
 
 ## Testing
 
-Running tests for this service is very straight forward. First, your API key must be taken from your [profile](https://www.unpac.me/account#/) and set as the `UPM_API_KEY` environment variable within your terminal. Once done, run the following: `python3.7 -m unittest test_unpacme_al`. **NOTE**: You must have remaining quota in order to process the tests properly.
+In order to run tests for this service, you will first require the AssemblyLine Python packages. These can be installed using the instructions [here](https://cybercentrecanada.github.io/assemblyline4_docs/docs/developer_manual/services/run_your_service.html). Next, your API key must be taken from your [profile](https://www.unpac.me/account#/) and set as the `UPM_API_KEY` environment variable within your terminal. Once done, run the following (in this instance I'm using Python 3.7 which is the official supported version of Python for AssemblyLine): `python3.7 -m unittest test_unpacme_al`. **NOTE**: You must have remaining unpac.me quota in order to run the tests properly.
 
 ## Dependencies
 
-The current version of this service makes use of a [third-party library](https://github.com/R3MRUM/unpacme/blob/master/unpacme.py) which is not officially supported by unpac.me. This will likely change in the future when the service provides full support for all unpac.me feature sets.
+The current version of this service makes use of a [third-party library](https://github.com/R3MRUM/unpacme/blob/master/unpacme.py) which is not officially supported by unpac.me. A big shout out to @R3MRUM for writing this library.
