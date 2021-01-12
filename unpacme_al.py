@@ -9,13 +9,9 @@ from unpacme import unpacme
 import time
 import os
 
-from assemblyline.common import forge
-from assemblyline.common.dict_utils import flatten
-from assemblyline.common.hexdump import hexdump
 from assemblyline_v4_service.common.base import ServiceBase
 from assemblyline_v4_service.common.result import Result, ResultSection, BODY_FORMAT, Heuristic
 
-cl_engine = forge.get_classification()
 MAX_TIMEOUT = 300
 TIMEOUT_INCREMENT = 15
 
@@ -131,7 +127,7 @@ class UnpacMeAL(ServiceBase):
         # Write sample to disk
         fp = self.write_tmp(request)
         api_key = request.get_param("api_key")
-        #api_key = os.environ['UPM_API_KEY']
+
         presults = None
         if self.prechecks(request, api_key):
             upm = unpacme.unpacme(api_key)

@@ -1,5 +1,5 @@
 name: UNPACME
-version: 0.1
+version: 0.2
 description: This service submits 32-bit Portable Executables to unpac.me and provides the results.
 
 accepts: executable/windows/pe32
