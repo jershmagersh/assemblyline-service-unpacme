@@ -25,14 +25,6 @@ class UnpacMeAL(ServiceBase):
     def start(self):
         self.log.info(f"start() from {self.service_attributes.name} service called")
 
-    def write_tmp(self, request):
-        fn = f"{request.file_name}"
-        fp = os.path.join(self.working_directory, fn)
-        with open(fp, 'wb') as dcf:
-            dcf.write(request.file_contents)
-            self.log.debug(f"Writing file to be uploaded to: {fp}")
-        return fp
-
     def filetype_check(self, request):
         valid_filetype = False
 
@@ -124,14 +116,12 @@ class UnpacMeAL(ServiceBase):
     def execute(self, request):
         # Result Object
         result = Result()
-        # Write sample to disk
-        fp = self.write_tmp(request)
         api_key = request.get_param("api_key")
 
         presults = None
         if self.prechecks(request, api_key):
             upm = unpacme.unpacme(api_key)
-            record = upm.upload_file(fp)
+            record = upm.upload_file(request.file_path)
             if record['success']:
                 analysis_results = self.wait_for_completion(upm, record)
                 if analysis_results:

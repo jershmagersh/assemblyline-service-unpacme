@@ -1,5 +1,5 @@
 name: UNPACME
-version: 0.2
+version: 0.3
 description: This service submits 32-bit Portable Executables to unpac.me and provides the results.
 
 accepts: executable/windows/pe32
@@ -15,9 +15,6 @@ disable_cache: false
 enabled: true
 is_external: true
 licence_count: 0
-
-config:
-  base_url: https://api.unpac.me/api/v1/public/
 
 submission_params:
   - default: ''
