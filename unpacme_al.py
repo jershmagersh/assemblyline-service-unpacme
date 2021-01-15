@@ -1,13 +1,6 @@
 import json
-import os
-import random
-import tempfile
-import glob
-import importlib
-import inspect
 from unpacme import unpacme
 import time
-import os
 
 from assemblyline_v4_service.common.base import ServiceBase
 from assemblyline_v4_service.common.result import Result, ResultSection, BODY_FORMAT, Heuristic
