@@ -13,7 +13,9 @@ import cart
 API_KEY = os.environ['UPM_API_KEY']
 TEST_BINARY_PATH = 'examples/11b2e4900959874f4a335514c58c2ded88a3268b099984745e4c36d5ae434ea3.cart'
 
-# Stolen from https://github.com/CybercentreCanada/assemblyline-service-characterize/blob/c5295ca900ff319c5e80b10382cdd7652c61eb2b/test/test_service.py#L16
+# Stolen from
+# https://github.com/CybercentreCanada/assemblyline-service-characterize/
+# blob/c5295ca900ff319c5e80b10382cdd7652c61eb2b/test/test_service.py#L16
 sample1 = dict(
     sid=1,
     metadata={},
@@ -34,6 +36,7 @@ sample1 = dict(
     ttl=3600,
 )
 
+
 class TestResults(unittest.TestCase):
     presults = None
     upm = unpacme.unpacme(API_KEY)
@@ -52,11 +55,11 @@ class TestResults(unittest.TestCase):
             self.gen_results(api_response)
 
     def proc_results(self, api_response):
-        #Make sure general processing is working.
+        # Make sure general processing is working.
         procr = self.upmal.process_results(api_response, self.upm)
         self.assertTrue(procr['unpacked'])
 
-        #Make sure resulting samples downloaded properly.
+        # Make sure resulting samples downloaded properly.
         for sample in procr['unpacked_samples']:
             self.assertTrue(os.path.exists(sample['data_path']))
 
