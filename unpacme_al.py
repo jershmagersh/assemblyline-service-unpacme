@@ -114,7 +114,7 @@ class UnpacMeAL(ServiceBase):
         api_key = request.get_param("api_key")
 
         if self.prechecks(request, api_key):
-            upm = unpacme.unpacme(api_key)
+            upm = unpacme.UnpacMe(api_key)
             record = upm.upload_file(request.file_path)
             if record['success']:
                 analysis_results = self.wait_for_completion(upm, record)

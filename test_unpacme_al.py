@@ -39,11 +39,11 @@ sample1 = dict(
 
 class TestResults(unittest.TestCase):
     presults = None
-    upm = unpacme.unpacme(API_KEY)
+    upm = unpacme.UnpacMe(API_KEY)
     upmal = UnpacMeAL()
 
     def test_upload_proc_results(self):
-        upm = unpacme.unpacme(API_KEY)
+        upm = unpacme.UnpacMe(API_KEY)
 
         # We need to decrypt the cart format to process the sample.
         cart.unpack_file(TEST_BINARY_PATH, "{}_dec".format(TEST_BINARY_PATH))
