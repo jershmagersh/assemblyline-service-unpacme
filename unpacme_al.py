@@ -8,6 +8,7 @@ from assemblyline_v4_service.common.result import Result, ResultSection, BODY_FO
 MAX_TIMEOUT = 300
 TIMEOUT_INCREMENT = 15
 
+
 class UnpacMeAL(ServiceBase):
     environments = {}
     compiled_rules = None
@@ -15,10 +16,8 @@ class UnpacMeAL(ServiceBase):
     def __init__(self, config=None):
         super(UnpacMeAL, self).__init__(config)
 
-    def start(self):
-        self.log.info(f"start() from {self.service_attributes.name} service called")
-
-    def filetype_check(self, request):
+    @staticmethod
+    def filetype_check(request):
         valid_filetype = False
 
         if request.file_type == 'executable/windows/pe32':
@@ -40,7 +39,8 @@ class UnpacMeAL(ServiceBase):
 
         return passed_prechecks
 
-    def check_status(self, upm, rid):
+    @staticmethod
+    def check_status(upm, rid):
         status = upm.get_analysis_report(rid)
         rstatus = None
         if status == 'validating' or status == 'unpacking':
@@ -55,7 +55,7 @@ class UnpacMeAL(ServiceBase):
     def wait_for_completion(self, upm, record):
         total = 0
         status = None
-        while(not status):
+        while not status:
             status = self.check_status(upm, record['id'])
             if status:
                 break
@@ -89,7 +89,8 @@ class UnpacMeAL(ServiceBase):
 
         return results
 
-    def generate_results(self, presults, result, analysis_results, request):
+    @staticmethod
+    def generate_results(presults, result, analysis_results, request):
         if presults['unpacked']:
             result.add_section(ResultSection("Successully unpacked binary.", heuristic=Heuristic(1)))
 
@@ -101,8 +102,9 @@ class UnpacMeAL(ServiceBase):
                     result.add_section(section)
             request.add_extracted(r['data_path'], r['sha256'], f'Unpacked from {request.sha256}')
 
-        result.add_section(ResultSection(f"UNPACME Detailed Results", body_format=BODY_FORMAT.JSON,
-                                                body=json.dumps(analysis_results['results'])))
+        result.add_section(ResultSection(f"UNPACME Detailed Results",
+                                         body_format=BODY_FORMAT.JSON,
+                                         body=json.dumps(analysis_results['results'])))
 
         return result, request
                 
@@ -111,7 +113,6 @@ class UnpacMeAL(ServiceBase):
         result = Result()
         api_key = request.get_param("api_key")
 
-        presults = None
         if self.prechecks(request, api_key):
             upm = unpacme.unpacme(api_key)
             record = upm.upload_file(request.file_path)
