@@ -1,9 +1,9 @@
 name: UNPACME
-version: 0.3
+version: $SERVICE_TAG
 description: This service submits 32-bit Portable Executables to unpac.me and provides the results.
 
 accepts: executable/windows/pe32
-rejects: empty
+rejects: empty|metadata/.*
 
 stage: CORE
 category: Dynamic Analysis
@@ -12,7 +12,7 @@ file_required: true
 timeout: 600
 disable_cache: false
 
-enabled: true
+enabled: false
 is_external: true
 licence_count: 0
 
@@ -35,7 +35,7 @@ heuristics:
     description: Binary contains an applied malware ID.
 
 docker_config:
-  image: jershmagersh/assemblyline-service-unpacme:latest
+  image: ${REGISTRY}cccs/assemblyline-service-unpacme:$SERVICE_TAG
   cpu_cores: 0.25
   ram_mb: 128
   allow_internet_access: true
