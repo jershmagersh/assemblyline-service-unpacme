@@ -89,8 +89,7 @@ class UnpacMeAL(ServiceBase):
 
         return results
 
-    @staticmethod
-    def generate_results(presults, result, analysis_results, request):
+    def generate_results(self, presults, result, analysis_results, request):
         if presults['unpacked']:
             result.add_section(ResultSection("Successully unpacked binary.", heuristic=Heuristic(1)))
 
@@ -100,14 +99,15 @@ class UnpacMeAL(ServiceBase):
                     section = ResultSection("{} - {}".format(r['sha256'], rm['name']), heuristic=Heuristic(2))
                     section.add_line("Details: {}".format(rm['reference']))
                     result.add_section(section)
-            request.add_extracted(r['data_path'], r['sha256'], f'Unpacked from {request.sha256}')
+            request.add_extracted(r['data_path'], r['sha256'], f'Unpacked from {request.sha256}',
+                                  safelist_interface=self.api_interface)
 
         result.add_section(ResultSection(f"UNPACME Detailed Results",
                                          body_format=BODY_FORMAT.JSON,
                                          body=json.dumps(analysis_results['results'])))
 
         return result, request
-                
+
     def execute(self, request):
         # Result Object
         result = Result()
