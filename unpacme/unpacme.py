@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import requests
-from os import listdir
-from os.path import isdir, isfile, join, basename
 import logging
-from time import sleep
 import sys
+from os import listdir
+from os.path import basename, isdir, isfile, join
+from time import sleep
+
+import requests
 
 
 class UnpacMe(object):
