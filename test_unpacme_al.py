@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
-import unittest
-from unpacme_al import UnpacMeAL
-from unpacme import unpacme
 import os
-from assemblyline_v4_service.common.result import Result
-from assemblyline_v4_service.common.request import ServiceRequest
-from assemblyline.odm.messages.task import Task as ServiceTask
-from assemblyline_v4_service.common.task import Task
+import unittest
+
 import cart
+from assemblyline.odm.messages.task import Task as ServiceTask
+from assemblyline_v4_service.common.request import ServiceRequest
+from assemblyline_v4_service.common.result import Result
+from assemblyline_v4_service.common.task import Task
+from unpacme import unpacme
+from unpacme_al import UnpacMeAL
 
 API_KEY = os.environ.get('UPM_API_KEY', "InvalidKey!")
 TEST_BINARY_PATH = 'examples/11b2e4900959874f4a335514c58c2ded88a3268b099984745e4c36d5ae434ea3.cart'

@@ -1,9 +1,9 @@
 import json
-from unpacme import unpacme
 import time
 
 from assemblyline_v4_service.common.base import ServiceBase
-from assemblyline_v4_service.common.result import Result, ResultSection, BODY_FORMAT, Heuristic
+from assemblyline_v4_service.common.result import BODY_FORMAT, Heuristic, Result, ResultSection
+from unpacme import unpacme
 
 MAX_TIMEOUT = 300
 TIMEOUT_INCREMENT = 15
